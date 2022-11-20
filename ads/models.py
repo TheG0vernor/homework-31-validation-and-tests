@@ -1,6 +1,7 @@
 from django.core import validators
 from django.db import models
 
+from ads.validators_ad import check_is
 from users.models import User
 
 

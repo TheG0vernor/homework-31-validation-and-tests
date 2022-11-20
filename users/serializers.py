@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from users.models import Location, User
+from users.validators_user import DateBirthdayValidator, EmailValidator
 
 
 class UserListSerializer(serializers.ModelSerializer):
@@ -40,6 +41,12 @@ class UserCreateSerializer(serializers.ModelSerializer):
         many=True,
         queryset=Location.objects.all(),
         slug_field='name'
+    )
+    birth_date = serializers.DateField(
+        validators=[DateBirthdayValidator(min_age=9)])
+    email = serializers.EmailField(
+        validators=[EmailValidator(unaccept_domain=['rambler.ru'])],
+        max_length=100,
     )
 
     class Meta:
