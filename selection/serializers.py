@@ -18,8 +18,25 @@ class SelectionRetrieveSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class SelectionCUDSerializer(serializers.ModelSerializer):
+class SelectionUDSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Selection
         fields = '__all__'
+
+
+class SelectionCreateSerializer(serializers.ModelSerializer):
+    owner = serializers.PrimaryKeyRelatedField(required=False, read_only=True)
+
+    def _get_owner(self):
+        request = self.context.get('request', None)
+        if request:
+            return request.user
+
+    def create(self, validated_data):
+        validated_data['owner'] = self._get_owner()
+        return super().create(validated_data)
+
+    class Meta:
+        model = Selection
+        fields = ['id', 'name', 'items', 'owner']

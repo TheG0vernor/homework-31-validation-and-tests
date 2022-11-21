@@ -30,11 +30,3 @@ class AdFactory(factory.django.DjangoModelFactory):
     price = 12
     category = factory.SubFactory(CategoryFactory)
     author = factory.SubFactory(UserFactory)
-
-
-class SelectionFactory(factory.django.DjangoModelFactory):
-    class Meta:
-        model = Selection
-    name = 'test_name'
-    # items = factory.SubFactory(AdFactory)
-    owner = factory.SubFactory(UserFactory)

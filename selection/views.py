@@ -3,18 +3,20 @@ from rest_framework.viewsets import ModelViewSet
 
 from selection.models import Selection
 from selection.permission import SelectionPermission
-from selection.serializers import SelectionListSerializer, SelectionCUDSerializer, SelectionRetrieveSerializer
+from selection.serializers import SelectionListSerializer, SelectionUDSerializer, SelectionRetrieveSerializer, \
+    SelectionCreateSerializer
 
 
 class SelectionViewSet(ModelViewSet):
     queryset = Selection.objects.all()
 
-    default_serializer = SelectionCUDSerializer
+    default_serializer = SelectionUDSerializer
     default_permission = [AllowAny()]
 
     serializer_classes = {
         'list': SelectionListSerializer,
         'retrieve': SelectionRetrieveSerializer,
+        'create': SelectionCreateSerializer,
     }
 
     permissions = {

@@ -4,7 +4,7 @@ import pytest
 @pytest.mark.django_db
 def test_create_ad(client, ad, moderator_token):
     expected_response = {
-        "id": 2,  # при несовпадении вернуть ad.pk
+        "id": ad.pk + 1,  # pk в тесте отстаёт на 1 единицу
         "author": ad.author_id,
         "category": ad.category_id,
         "name": 'test_names',
