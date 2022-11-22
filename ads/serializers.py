@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from ads.models import Ad
-from ads.validators_ad import check_is
+from ads.validators import check_is
 
 
 class AdListSerializer(serializers.ModelSerializer):

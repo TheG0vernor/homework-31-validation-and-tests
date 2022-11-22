@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from users.models import Location, User
-from users.validators_user import DateBirthdayValidator, EmailValidator
+from users.validators import DateBirthdayValidator, EmailValidator
 
 
 class UserListSerializer(serializers.ModelSerializer):

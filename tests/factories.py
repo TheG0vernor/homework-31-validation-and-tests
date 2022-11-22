@@ -3,7 +3,6 @@ from datetime import date
 import factory
 
 from ads.models import Ad, Category
-from selection.models import Selection
 from users.models import User
 
 

@@ -1,6 +1,7 @@
 from datetime import date
 from typing import List, Union
 
+from dateutil.relativedelta import relativedelta
 from rest_framework.exceptions import ValidationError
 
 
@@ -9,9 +10,10 @@ class DateBirthdayValidator:
         self.min_age = min_age
 
     def __call__(self, value: date):
-        value = (date.today() - value).days // 365
-        if value < self.min_age:  # если возраст меньше 9
-            raise ValidationError(f'must be over 9 years old')
+        # value = (date.today() - value).days // 365
+        value = relativedelta(date.today(), value).years  # проверка на возраст
+        if value < self.min_age:  # если возраст меньше требуемого
+            raise ValidationError(f'must be over {self.min_age} years old')
 
 
 class EmailValidator:

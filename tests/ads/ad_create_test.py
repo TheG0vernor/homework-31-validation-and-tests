@@ -2,11 +2,11 @@ import pytest
 
 
 @pytest.mark.django_db
-def test_create_ad(client, ad, moderator_token):
+def test_create_ad(client, user, category, moderator_token):
     expected_response = {
-        "id": ad.pk + 1,  # pk в тесте отстаёт на 1 единицу
-        "author": ad.author_id,
-        "category": ad.category_id,
+        "id": 1,
+        "author": user.id,
+        "category": category.id,
         "name": 'test_names',
         "price": 12,
         "description": None,
@@ -16,8 +16,8 @@ def test_create_ad(client, ad, moderator_token):
     data = {
         "name": 'test_names',
         "price": 12,
-        "category": ad.category_id,
-        "author": ad.author_id
+        "category": category.id,
+        "author": user.id
     }
     response = client.post(
         path='/ads/create/',

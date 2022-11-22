@@ -1,8 +1,5 @@
 import pytest
 
-from ads.serializers import AdListSerializer
-from tests.factories import AdFactory
-
 
 @pytest.mark.django_db
 def test_create_select(client, ad, user, moderator_token):
@@ -10,7 +7,7 @@ def test_create_select(client, ad, user, moderator_token):
         "id": 1,
         "name": "test_name",
         "items": [ad.pk],
-        "owner": user.pk + 1  # т.к. создаётся 2 user'a и идёт несоответствие pk
+        "owner": user.id
     }
     data = {
         "name": "test_name",
