@@ -30,11 +30,12 @@ class SelectionCreateSerializer(serializers.ModelSerializer):
 
     def _get_owner(self):
         request = self.context.get('request', None)
-        if request:
+        if request.user.role not in ('moderator', 'admin'):
             return request.user
 
     def create(self, validated_data):
-        validated_data['owner'] = self._get_owner()
+        if self._get_owner():
+            validated_data['owner'] = self._get_owner()
         return super().create(validated_data)
 
     class Meta:

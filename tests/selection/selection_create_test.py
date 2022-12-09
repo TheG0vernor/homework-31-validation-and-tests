@@ -7,11 +7,12 @@ def test_create_select(client, ad, user, moderator_token):
         "id": 1,
         "name": "test_name",
         "items": [ad.pk],
-        "owner": user.id
+        "owner": user.pk
     }
     data = {
         "name": "test_name",
         "items": [ad.pk],
+        'owner': user.pk
     }
     response = client.post(
             path='/selection/',
